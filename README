@@ -1,0 +1,11 @@
+csvmaker.sh:
+This is a simple script to take in a list of files from the command line and pump it into a csv file.
+
+id3Chapel.sh:
+This was created for a project that was converting bible college chapels on tape masters to mp3 format. This script would take the name that was output in a certain format and create id3 tags from that information. (I worked a bit on porting this to ruby in id3Chapel.rb but didn't get far.)
+
+users.dhcp.sh:
+I created this to make a report based on the dhcp leases in order to more easily grasp the information I needed to review.
+
+dhcp.awk:
+This is used in users.dhcp.sh for processing dhcp leases. It is assumed to be in ~/scripts/bin. If you place it elsewhere, you'll need to edit users.dhcp.sh.
