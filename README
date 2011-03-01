@@ -9,3 +9,6 @@ I created this to make a report based on the dhcp leases in order to more easily
 
 dhcp.awk:
 This is used in users.dhcp.sh for processing dhcp leases. It is assumed to be in ~/scripts/bin. If you place it elsewhere, you'll need to edit users.dhcp.sh.
+
+house_use_bkgnd.sh:
+This script grabs charts made is google spreadsheets and builds a background from them. I use this to keep my utility usage and other info in front of me. I apply the background to the machine that is connected to the TV for hulu and other media watching. A cron job can be used to make sure the data is constantly up-to-date.
