@@ -1,3 +1,11 @@
-waterChart="https://spreadsheets.google.com/oimg?key=0AqIFAZKGGcH9dDDFLaGRLM1E&oid=4&zx=4nrwgmyn"
-electricChart="https://spreadsheets.google.com/oimg?key=0AqIFAZKGGcaGRLM1E&oid=5&zx=cgxtcul"
-mainChart="https://spreadsheets.google.com/oimg?key=0AqIFAZKGGcRLM1E&oid=2&zx=jvemqg7"
+# This config file provides the chart locations for the house_use_bkgnd.sh file
+# It should have three lines setting these three variables. I'm 
+# extracting them so that I can share this script without sharing my graphs.
+# You can get this address by publishing the chart, choosing image and copying
+# the url included in the HTML. 
+
+# Copy this file to charts.cfg to apply the configuration
+
+waterChart="https://spreadsheets.google.com/oimg?key=0AqIFsomethingM1E&oid=4&zx=4nrn"
+electricChart="https://spreadsheets.google.com/oimg?key=0AqIFsomethingM1E&oid=5&zx=cgxl"
+mainChart="https://spreadsheets.google.com/oimg?key=0AqIFsomethingM1E&oid=2&zx=jve7"
