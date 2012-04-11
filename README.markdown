@@ -18,3 +18,6 @@ This script grabs charts made is google spreadsheets and builds a background fro
 
 ## linux_audit.sh
 This is a little script I tossed together to audit a series of virtual LAMP servers I was building for a client, allowing me to easily compare their requirements with my results when I was done and report those results to them for their own purposes. Things like the number of processors, hard drive space, RAM, certain software versions can be quickly seen in the output. I ran it with this little one-liner './linux_audit.sh > `hostname`.audit.txt'. One advantage of this is that errors from running commands where the software doesn't exist simply resulted in no output in the reported document rather than showing a error so it was a bit cleaner.
+
+## getip.sh & getipv6.sh
+Simple scripts that returns the IP or IPv6 address of a linux box and nothing but. This can be pretty handy since Linux doesn't provide this info on its own without adding lots of other info.
