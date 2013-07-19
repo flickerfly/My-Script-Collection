@@ -21,3 +21,9 @@ This is a little script I tossed together to audit a series of virtual LAMP serv
 
 ## getip.sh & getipv6.sh
 Simple scripts that returns the IP or IPv6 address of a linux box and nothing but. This can be pretty handy since Linux doesn't provide this info on its own without adding lots of other info.
+
+## vncserver_rc 
+This is a startup script for tightvncserver on ubuntu capable of handling multiple users. It requires a properly configured /etc/vncservers.conf and each user needs a .vnc/passwd and .vnc/xstartup for their service to startup properly. Manually run 'tightvncserver :1' for each user to do this and then 'tightvncserver -kill :1" to shut the server off. I don't yet have the status stuff working well, but start and stop function just fine. A sample vncservers.conf can also be found in this repo.
+
+## getswap.sh
+Reports the swap space usage by Process on a linux box

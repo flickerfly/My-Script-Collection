@@ -1,0 +1,113 @@
+#!/bin/bash -e
+### BEGIN INIT INFO
+# Provides:          vncserver
+# Required-Start:    networking
+# Default-Start:     3 4 5
+# Default-Stop:      0 6
+### END INIT INFO
+
+set -e
+. /lib/lsb/init-functions
+
+#Does the config file exist, if not halt
+[ -f /etc/vncservers.conf ] || { echo "Config file /etc/vncservers.conf does not exist" ; exit 1 ;}
+
+#Prep some variables to received input from the config file
+unset VNCSERVERARGS
+VNCSERVERS=""
+[ -f /etc/vncservers.conf ] && . /etc/vncservers.conf 
+
+prog=$"VNC Server"
+
+#### START THE SERVICES ####
+start() {
+REQ_USER=$2 #Check to see if a specific user's server need to be restarted
+
+
+echo -n $"Starting $prog: " #This line start the output and it appended below
+ulimit -S -c 0 >/dev/null 2>&1
+RETVAL=0
+
+for display in ${VNCSERVERS} #iterate over the displays
+  do
+    export USER="${display##*:}"
+    if test -z "${REQ_USER}" -o "${REQ_USER}" == ${USER} ; then
+      echo "${display} " #appends the display number to the output line
+      unset BASH_ENV ENV
+      DISP="${display%%:*}"
+      export VNCUSERARGS="${VNCSERVERARGS[${DISP}]}"
+      su ${USER} -c "cd ~${USER} && [ -f .vnc/passwd ] && tightvncserver :${DISP} ${VNCUSERARGS}" #start a single display
+    fi
+  done
+}
+
+#### STOP THE SERVICES ####
+stop() {
+REQ_USER=$2
+
+echo -n $"Shutting down ${prog}: "
+
+for display in ${VNCSERVERS}
+  do
+    export USER="${display##*:}"
+    if test -z "${REQ_USER}" -o "${REQ_USER}" == ${USER} ; then
+      echo "${display} "
+      unset BASH_ENV ENV
+      export USER="${display##*:}"
+      su ${USER} -c "tightvncserver -kill :${display%%:*}" >/dev/null 2>&1
+    fi
+  done
+
+echo -e "${prog} Stopped"
+}
+
+#### GET THE SERVICES STATUS ####
+status() {
+REQ_USER=$2
+exitcode=0
+
+if test ${REQ_USER}
+  then echo "Checking User Service: ${REQ_USER}"
+  else echo "Checking ${VNCSERVERS}"
+fi
+
+for display in ${VNCSERVERS}
+  do
+    if test ${REQ_USER}
+      then status_of_proc -p "/tmp/.X${displayy%%:*}-lock" /usr/bin/Xtightvnc $display && exit 0 || exit $?
+      else status_of_proc -p "/tmp/.X${displayy%%:*}-lock" /usr/bin/Xtightvnc $display && statuscode=$?
+      if test $statuscode > $exitcode; then $exitcode=statuscode; fi
+    fi
+  done
+
+exit $exitcode
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    start $@
+    ;;
+  stop)
+    stop $@
+    ;;
+  restart|reload)
+    stop $@
+    sleep 3
+    start $@
+    ;;
+  condrestart)
+    if [ -f /var/lock/subsys/vncserver ]; then
+      stop $@
+      sleep 3
+      start $@
+    fi
+    ;;
+  status)
+    echo "This doesn't quite work."
+    status $@
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+    exit 1
+esac
