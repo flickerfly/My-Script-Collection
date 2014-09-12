@@ -7,6 +7,14 @@ echo "## Linux Kernel:"
 uname -a
 echo ""
 
+echo "## LSB Reports Distro"
+lsb_release -ds
+echo ""
+
+echo "## Proc Version"
+cat /proc/version
+echo ""
+
 echo "## Apache"
 apache2 -v 
 echo ""
