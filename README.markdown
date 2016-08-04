@@ -27,3 +27,9 @@ This is a startup script for tightvncserver on ubuntu capable of handling multip
 
 ## getswap.sh
 Reports the swap space usage by Process on a linux box
+
+## rcl.service
+This is a systemd startup script / unit script / service script or whatever systemd calls it for the Retrospect backup client. When systemd 231 comes around to be used in a Ubuntu LTS or whatever distro you are using, consider adding 'ExecStatus=/usr/local/retrospect/client/retrocpl' to include the extra status info that older systemd doesn't gather. Ubuntu LTS 16.04 is currently using systemd 291 (so close).
+
+## list-all-cron-jobs.sh
+For that time when your developers can't answer what cron job is running at what time, perhaps a bunch of them are out of reach, and one of their jobs is potentially changing a bunch of permissions inappropriately or otherwise wreaking havoc on a regular basis upon your system. Track 'em down! (Thanks to yukondude for posting a bunch of this on http://stackoverflow.com/a/137173/264881. 
