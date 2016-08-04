@@ -9,11 +9,11 @@
 # Set distro to...
 if which lsb_release > /dev/null; then
   # the LSB description field, removing surrounding quotes if they exist
-  distro=`lsb_release -ds | sed -e 's/^\"//'  -e 's/\"$//'`
+  distro=`lsb_release -s | sed -e 's/^\"//'  -e 's/\"$//'`
+  version=`lsb_releas -r`
 elif [ -a /etc/debian_version ]; then
   distro="Debian"
   version=`cat /etc/debian_version`
-  distro="$distro $version"
 elif [ -a /etc/centos-release ]; then
   distro=`cat /etc/centos-release`
 elif [ -a /etc/redhat-release ]; then
@@ -26,6 +26,29 @@ elif [ -a /proc/version ]; then
 fi
 
 # Report the findings to PRTG (as output of script)
+ 
+# Advanced PRTG type sensor output (XML)
+# Needs more work before it can be usedi
+#if [ -n "no error" ]; then
+#<prtg>
+#  <result>
+#    <channel>Distribution</channel>
+#    <value>$distro</value>
+#  </result>
+#  <result>
+#     <channel>Version</channel>
+#     <value>$version</value>
+#  </result>
+#</prtg>
+#else
+#<prtg>
+#  <error>1</error>
+#  <text>Couldn't retrieve info</text>
+#</prtg>
+#fi
+
+
+# Standard PRTG type sensor output
 if [ -n "$distro" ]; then 
   echo "0:0:$distro" 
 else 

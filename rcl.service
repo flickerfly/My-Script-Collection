@@ -1,0 +1,13 @@
+[Unit]
+Description=Retrospect backup client
+After=network.target local-fs.target system.slice systemd-journald-dev-log.socket basic.target sysinit.target systemd-journald.socket
+Before=shutdown.target graphical.target multi-user.target
+
+[Service]
+ExecStart=/usr/local/retrospect/client/retroclient 
+ExecStop=/usr/local/retrospect/client/retrocpl -stop
+Restart=on-failure
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

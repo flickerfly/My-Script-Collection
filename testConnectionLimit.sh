@@ -4,7 +4,7 @@
 ip=$1
 port=$2
 
-for i in {1..100}
+for ((i=1; i<=100; i++))
 do
   # do nothing just connect and exit
   echo "exit" | nc ${ip} ${port};
