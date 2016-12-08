@@ -33,3 +33,8 @@ This is a systemd startup script / unit script / service script or whatever syst
 
 ## list-all-cron-jobs.sh
 For that time when your developers can't answer what cron job is running at what time, perhaps a bunch of them are out of reach, and one of their jobs is potentially changing a bunch of permissions inappropriately or otherwise wreaking havoc on a regular basis upon your system. Track 'em down! (Thanks to yukondude for posting a bunch of this on http://stackoverflow.com/a/137173/264881. 
+## Set-LocalUser.ps1
+Allows management of local user accounts on windows machines. 
+
+## Create-LocalAdmins.ps1
+Create local admin accounts on a selection of computers pulled from ActiveDirectory. Depends on Set-LocalUser.ps1
